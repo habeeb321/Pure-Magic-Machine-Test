@@ -12,6 +12,9 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      controller.fetchAllProducts();
+    });
     return Scaffold(
       backgroundColor: Colors.grey[50],
       appBar: _buildAppbar(context),
@@ -59,8 +62,9 @@ class HomeScreen extends StatelessWidget {
       constraints: BoxConstraints(
         maxWidth: isTablet ? 600 : double.infinity,
       ),
-      child: const CustomTextField(
-        placeholder: 'Search products...',
+      child: CustomTextField(
+        onChanged: controller.updateSearchField,
+        placeholder: 'Search filteredProducts...',
         prefixIcon: CupertinoIcons.search,
       ),
     );
@@ -79,9 +83,9 @@ class HomeScreen extends StatelessWidget {
         crossAxisSpacing: isTablet ? 20 : 12,
         mainAxisSpacing: isTablet ? 20 : 12,
       ),
-      itemCount: controller.products.length,
+      itemCount: controller.filteredProducts.length,
       itemBuilder: (context, index) {
-        var product = controller.products[index];
+        var product = controller.filteredProducts[index];
         return _buildProductCard(context, product, index, isTablet, true);
       },
     );
@@ -90,11 +94,11 @@ class HomeScreen extends StatelessWidget {
   Widget _buildListView(BuildContext context, bool isTablet) {
     return ListView.separated(
       physics: const BouncingScrollPhysics(),
-      itemCount: controller.products.length,
+      itemCount: controller.filteredProducts.length,
       separatorBuilder: (context, index) =>
           SizedBox(height: isTablet ? 16 : 12),
       itemBuilder: (context, index) {
-        var product = controller.products[index];
+        var product = controller.filteredProducts[index];
         return _buildProductCard(context, product, index, isTablet, false);
       },
     );

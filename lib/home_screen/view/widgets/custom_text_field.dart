@@ -6,11 +6,13 @@ class CustomTextField extends StatelessWidget {
   final IconData prefixIcon;
   final bool obscureText;
   final TextEditingController? controller;
+  final void Function(String)? onChanged;
 
   const CustomTextField({
     super.key,
     required this.placeholder,
     required this.prefixIcon,
+    required this.onChanged,
     this.obscureText = false,
     this.controller,
   });
@@ -21,6 +23,7 @@ class CustomTextField extends StatelessWidget {
       controller: controller,
       placeholder: placeholder,
       obscureText: obscureText,
+      onChanged: onChanged,
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
       prefix: Padding(
         padding: const EdgeInsets.only(left: 8, right: 8),

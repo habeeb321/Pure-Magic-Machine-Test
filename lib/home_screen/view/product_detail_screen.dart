@@ -11,7 +11,7 @@ class ProductDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final product = controller.products[index];
+    final product = controller.filteredProducts[index];
     final size = MediaQuery.of(context).size;
     final isTablet = size.width > 600;
     final isLandscape = size.width > size.height;
@@ -175,8 +175,7 @@ class ProductDetailScreen extends StatelessWidget {
                       onPressed: () {
                         controller.addToCart(product);
                         ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                              content: Text('${product.title} added to cart')),
+                          const SnackBar(content: Text('Added to Cart')),
                         );
                       },
                     ),
@@ -253,7 +252,7 @@ class ProductDetailScreen extends StatelessWidget {
           onPressed: () {
             controller.addToCart(product);
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text('${product.title} added to cart')),
+              const SnackBar(content: Text('Added to Cart')),
             );
           },
         ),
@@ -482,7 +481,7 @@ class ProductDetailScreen extends StatelessWidget {
             onPressed: () {
               controller.addToCart(product);
               ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('${product.title} added to cart')),
+                const SnackBar(content: Text('Added to Cart')),
               );
             },
           ),

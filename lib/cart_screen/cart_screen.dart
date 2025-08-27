@@ -112,7 +112,7 @@ class CartScreen extends StatelessWidget {
               borderRadius: BorderRadius.circular(12),
               child: Image.network(
                 item.image ?? '',
-                fit: BoxFit.cover,
+                fit: BoxFit.fill,
                 width: imageSize,
                 height: imageSize,
                 errorBuilder: (context, error, stackTrace) {
