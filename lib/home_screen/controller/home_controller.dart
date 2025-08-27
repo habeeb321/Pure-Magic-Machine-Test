@@ -4,6 +4,7 @@ import 'package:pure_magic/home_screen/model/get_all_products_model.dart';
 import 'package:pure_magic/home_screen/service/home_service.dart';
 
 class HomeController extends GetxController {
+  TextEditingController searchController = TextEditingController();
   RxList<GetAllProductsModel> products = <GetAllProductsModel>[].obs;
   RxList<GetAllProductsModel> filteredProducts = <GetAllProductsModel>[].obs;
   final loading = false.obs;

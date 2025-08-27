@@ -63,6 +63,7 @@ class HomeScreen extends StatelessWidget {
         maxWidth: isTablet ? 600 : double.infinity,
       ),
       child: CustomTextField(
+        controller: controller.searchController,
         onChanged: controller.updateSearchField,
         placeholder: 'Search filteredProducts...',
         prefixIcon: CupertinoIcons.search,
@@ -332,6 +333,8 @@ class HomeScreen extends StatelessWidget {
         builder: (_) => ProductDetailScreen(index),
       ),
     );
+    controller.searchController.clear();
+    controller.fetchAllProducts();
   }
 
   AppBar _buildAppbar(BuildContext context) {
