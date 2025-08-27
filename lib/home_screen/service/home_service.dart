@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:pure_magic/model/get_all_products_model.dart';
+import 'package:pure_magic/home_screen/model/get_all_products_model.dart';
 
 class HomeService {
   final Dio dio = Dio();

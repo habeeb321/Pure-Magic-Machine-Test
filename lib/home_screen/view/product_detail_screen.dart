@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pure_magic/controller/home_controller.dart';
-import 'package:pure_magic/model/get_all_products_model.dart';
+import 'package:pure_magic/home_screen/controller/home_controller.dart';
+import 'package:pure_magic/home_screen/model/get_all_products_model.dart';
 
 class ProductDetailScreen extends StatelessWidget {
   final int index;
@@ -153,6 +153,35 @@ class ProductDetailScreen extends StatelessWidget {
                     ),
                   ),
                 ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10.0),
+                  child: SizedBox(
+                    width: imageWidth * 0.55,
+                    child: ElevatedButton.icon(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.blue,
+                        foregroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(14),
+                        ),
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                      ),
+                      icon: const Icon(Icons.add_shopping_cart),
+                      label: const Text(
+                        'Add to Cart',
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.bold),
+                      ),
+                      onPressed: () {
+                        controller.addToCart(product);
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                              content: Text('${product.title} added to cart')),
+                        );
+                      },
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
@@ -218,6 +247,15 @@ class ProductDetailScreen extends StatelessWidget {
               size: 30,
             ),
           ),
+        ),
+        IconButton(
+          icon: const Icon(Icons.add_shopping_cart, color: Colors.blue),
+          onPressed: () {
+            controller.addToCart(product);
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text('${product.title} added to cart')),
+            );
+          },
         ),
       ],
       flexibleSpace: FlexibleSpaceBar(
@@ -422,6 +460,31 @@ class ProductDetailScreen extends StatelessWidget {
               height: 1.7,
               letterSpacing: 0.3,
             ),
+          ),
+        ),
+        const SizedBox(height: 24),
+        SizedBox(
+          width: double.infinity,
+          child: ElevatedButton.icon(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.blue,
+              foregroundColor: Colors.white,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(14),
+              ),
+              padding: const EdgeInsets.symmetric(vertical: 16),
+            ),
+            icon: const Icon(Icons.add_shopping_cart),
+            label: const Text(
+              'Add to Cart',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            onPressed: () {
+              controller.addToCart(product);
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text('${product.title} added to cart')),
+              );
+            },
           ),
         ),
       ],

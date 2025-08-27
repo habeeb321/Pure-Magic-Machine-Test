@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pure_magic/view/home_screen.dart';
+import 'package:pure_magic/bottom_navigation/view/bottom_navigation.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,10 +14,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Pure Magic',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
       ),
-      home: HomeScreen(),
+      home: BottomNavigation(),
     );
   }
 }
