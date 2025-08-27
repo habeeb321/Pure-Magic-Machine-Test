@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pure_magic/controller/home_controller.dart';
+import 'package:pure_magic/view/product_detail_screen.dart';
 import 'package:pure_magic/view/widgets/custom_text_field.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -38,7 +39,14 @@ class HomeScreen extends StatelessWidget {
                       itemBuilder: (context, index) {
                         var products = controller.products[index];
                         return ListTile(
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => ProductDetailScreen(index),
+                              ),
+                            );
+                          },
                           leading: ClipRRect(
                             borderRadius: BorderRadius.circular(12),
                             child: Image.network(
