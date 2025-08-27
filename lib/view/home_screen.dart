@@ -231,7 +231,7 @@ class HomeScreen extends StatelessWidget {
               borderRadius: BorderRadius.circular(12),
               child: Image.network(
                 product.image ?? '',
-                fit: BoxFit.cover,
+                fit: BoxFit.fill,
                 width: imageSize,
                 height: imageSize,
                 errorBuilder: (context, error, stackTrace) {
