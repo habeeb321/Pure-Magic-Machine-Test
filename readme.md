@@ -23,7 +23,3 @@ A Flutter mobile app showcasing products fetched from an API with GetX state man
 - Other Flutter core libraries (`material`, `cupertino`)
 
 ---
-
-## Setup Instructions
-
-1. **Clone the repository**
