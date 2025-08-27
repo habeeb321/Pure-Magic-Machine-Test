@@ -46,9 +46,12 @@ class HomeScreen extends StatelessWidget {
                     _buildSearchSection(context, isTablet),
                     SizedBox(height: isTablet ? 24 : 16),
                     Expanded(
-                      child: isGridView
-                          ? _buildGridView(context, crossAxisCount, isTablet)
-                          : _buildListView(context, isTablet),
+                      child: controller.filteredProducts.isEmpty
+                          ? _buildEmptyProducts(context, isTablet)
+                          : isGridView
+                              ? _buildGridView(
+                                  context, crossAxisCount, isTablet)
+                              : _buildListView(context, isTablet),
                     ),
                   ],
                 ),
@@ -386,5 +389,46 @@ class HomeScreen extends StatelessWidget {
     if (isTablet) return tablet;
     if (size.width < 360) return small;
     return base;
+  }
+
+  Widget _buildEmptyProducts(BuildContext context, bool isTablet) {
+    final size = MediaQuery.of(context).size;
+
+    return Align(
+      alignment: Alignment.center,
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: isTablet ? size.width * 0.1 : 32,
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.inventory_2_outlined,
+              size: isTablet ? 120 : 80,
+              color: Colors.grey[400],
+            ),
+            SizedBox(height: isTablet ? 24 : 16),
+            Text(
+              'No products found',
+              style: TextStyle(
+                fontSize: _getResponsiveFontSize(size, isTablet, 20, 24, 18),
+                fontWeight: FontWeight.w600,
+                color: Colors.black87,
+              ),
+            ),
+            SizedBox(height: isTablet ? 12 : 8),
+            Text(
+              'Try adjusting your search or check back later!',
+              style: TextStyle(
+                fontSize: _getResponsiveFontSize(size, isTablet, 16, 18, 14),
+                color: Colors.grey[600],
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
