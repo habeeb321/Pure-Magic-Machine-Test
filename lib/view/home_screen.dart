@@ -1,9 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/instance_manager.dart';
+import 'package:pure_magic/controller/home_controller.dart';
 import 'package:pure_magic/view/widgets/custom_text_field.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  HomeScreen({super.key});
+
+  final controller = Get.put(HomeController());
 
   @override
   Widget build(BuildContext context) {
@@ -28,24 +32,27 @@ class HomeScreen extends StatelessWidget {
               itemCount: 10,
               separatorBuilder: (context, index) => const SizedBox(height: 10),
               itemBuilder: (context, index) {
+                var products = controller.products[index];
                 return ListTile(
+                  onTap: () {},
                   leading: ClipRRect(
                     borderRadius: BorderRadius.circular(12),
                     child: Image.network(
-                      'https://4.img-dpreview.com/files/p/E~TS590x0~articles/3925134721/0266554465.jpeg',
-                      fit: BoxFit.cover,
+                      '${products.image}',
+                      fit: BoxFit.fill,
                       width: 50,
                       height: 50,
                     ),
                   ),
                   title: Text(
-                    'Datas: ${index + 1}',
+                    '${products.title}',
                     style: const TextStyle(
+                      fontSize: 15,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  subtitle: const Text('Price: 200'),
-                  tileColor: Colors.blue.withOpacity(0.08),
+                  subtitle: Text('₹${products.price}'),
+                  tileColor: Colors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
