@@ -4,9 +4,9 @@ import 'package:pure_magic/controller/home_controller.dart';
 import 'package:pure_magic/model/get_all_products_model.dart';
 
 class ProductDetailScreen extends StatelessWidget {
+  final int index;
   ProductDetailScreen(this.index, {super.key});
 
-  final int index;
   final controller = Get.find<HomeController>();
 
   @override
@@ -44,7 +44,6 @@ class ProductDetailScreen extends StatelessWidget {
     return SafeArea(
       child: Row(
         children: [
-          // Image Section
           Container(
             width: imageWidth,
             height: size.height,
@@ -60,7 +59,6 @@ class ProductDetailScreen extends StatelessWidget {
             ),
             child: Column(
               children: [
-                // Back button
                 Align(
                   alignment: Alignment.topLeft,
                   child: Container(
@@ -141,10 +139,23 @@ class ProductDetailScreen extends StatelessWidget {
                     ),
                   ),
                 ),
+                Obx(
+                  () => IconButton(
+                    onPressed: () {
+                      controller.toggleFavorite(index);
+                    },
+                    icon: Icon(
+                      controller.isFavorite(index)
+                          ? Icons.favorite
+                          : Icons.favorite_border,
+                      color: Colors.red,
+                      size: 32,
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
-          // Content Section
           Container(
             width: contentWidth,
             height: size.height,
@@ -193,6 +204,22 @@ class ProductDetailScreen extends StatelessWidget {
           ),
         ),
       ),
+      actions: [
+        Obx(
+          () => IconButton(
+            onPressed: () {
+              controller.toggleFavorite(index);
+            },
+            icon: Icon(
+              controller.isFavorite(index)
+                  ? Icons.favorite
+                  : Icons.favorite_border,
+              color: Colors.red,
+              size: 30,
+            ),
+          ),
+        ),
+      ],
       flexibleSpace: FlexibleSpaceBar(
         background: Container(
           decoration: BoxDecoration(
@@ -299,7 +326,6 @@ class ProductDetailScreen extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Drag indicator (only for portrait mode)
         if (!isTablet && size.width <= size.height)
           Center(
             child: Container(
@@ -313,8 +339,6 @@ class ProductDetailScreen extends StatelessWidget {
           ),
         if (!isTablet && size.width <= size.height)
           SizedBox(height: isTablet ? 40 : 32),
-
-        // Product Title
         Text(
           product.title ?? '',
           style: TextStyle(
@@ -325,8 +349,6 @@ class ProductDetailScreen extends StatelessWidget {
           ),
         ),
         SizedBox(height: isTablet ? 32 : 24),
-
-        // Price Section
         Container(
           width: double.infinity,
           constraints: BoxConstraints(
@@ -372,8 +394,6 @@ class ProductDetailScreen extends StatelessWidget {
           ),
         ),
         SizedBox(height: isTablet ? 40 : 32),
-
-        // Description Section
         Text(
           'Description',
           style: TextStyle(

@@ -6,6 +6,7 @@ import 'package:pure_magic/service/home_service.dart';
 class HomeController extends GetxController {
   RxList<GetAllProductsModel> products = <GetAllProductsModel>[].obs;
   final loading = false.obs;
+  RxSet<int> favoriteIndices = <int>{}.obs;
 
   @override
   void onInit() {
@@ -24,5 +25,15 @@ class HomeController extends GetxController {
       debugPrint('fetchAllProducts Error: $e');
     }
     loading.value = false;
+  }
+
+  bool isFavorite(int index) => favoriteIndices.contains(index);
+
+  void toggleFavorite(int index) {
+    if (favoriteIndices.contains(index)) {
+      favoriteIndices.remove(index);
+    } else {
+      favoriteIndices.add(index);
+    }
   }
 }
